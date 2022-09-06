@@ -1,32 +1,28 @@
 import kotlin.system.measureTimeMillis
 
 fun main(args: Array<String>) {
-//    SP 4
-//    A palindromic number reads the same both ways.
-//    The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
-//    Find the largest palindrome made from the product of two 3-digit numbers.
 
-    var x = 0
-    var y = 0
-    var palindrome = 0
-    val elapsed = measureTimeMillis {
-        mainLoop@ for (num1 in 999 downTo 100) {
-            for (num2 in 999 downTo 100) {
-                val checker = (num1 * num2).toString()
-                if (checker == checker.reversed()) {
-                    if (checker.toInt() > palindrome) {
-                        x = num1
-                        y = num2
-                        palindrome = checker.toInt()
-                    }
+    var smallest: Int = 2520
+    val test = measureTimeMillis {
+        while (true) {
+            var x = 0
+            for (check in 11..20) {
+                if (smallest % check == 0) {
+                    x += 1
+                } else {
+                    smallest += 20
+                    break
                 }
+            }
+            if (x == 10) {
+                println("The smallest positive number that is divisible through 1-20 is: $smallest ")
+                break
             }
         }
     }
-    println("The largest palindrome made from the product of two 3-digit numbers is: $palindrome = $x x $y ")
-    println("Runtime: $elapsed milliseconds")
-}
 
+    println("Runtime: $test milliseconds")
+}
 
 //    SP 1
 //If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9.
@@ -69,6 +65,7 @@ fun main(args: Array<String>) {
 //        sumOfEvenFibonacci(firstNum, secondNum, sum)
 //}
 
+
 //SP 3
 //PRINT THE RUN TIME IN SECONDS AT THE END OF THE PROGRAM
 //The prime factors of 13195 are 5, 7, 13 and 29.
@@ -87,3 +84,29 @@ fun main(args: Array<String>) {
 //    println("The biggest prime factor of 600851475143 is: $number")
 //}
 //println("Runtime: $elapsed milliseconds")
+
+
+//    SP 4
+//    A palindromic number reads the same both ways.
+//    The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
+//    Find the largest palindrome made from the product of two 3-digit numbers.
+//
+//    var x = 0
+//    var y = 0
+//    var palindrome = 0
+//    val elapsed = measureTimeMillis {
+//        mainLoop@ for (num1 in 999 downTo 100) {
+//            for (num2 in 999 downTo 100) {
+//                var product = num1 * num2
+//                if (product > palindrome && product.isPalindrome()) {
+//                        x = num1
+//                        y = num2
+//                        palindrome = num1 * num2
+//                }
+//            }
+//        }
+//    }
+//    println("The largest palindrome made from the product of two 3-digit numbers is: $palindrome = $x x $y ")
+//    println("Runtime: $elapsed milliseconds")
+//
+//fun Int.isPalindrome(): Boolean = this.toString().reversed() == this.toString()
