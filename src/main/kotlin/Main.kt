@@ -5,18 +5,28 @@ fun main(args: Array<String>) {
 //    SP 4
 //    A palindromic number reads the same both ways.
 //    The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
-//
 //    Find the largest palindrome made from the product of two 3-digit numbers.
 
-    mainLoop@for (num1 in 999 downTo 100){
-        for (num2 in 999 downTo 100){
+    val list = mutableListOf<Int>()
+    mainLoop@ for (num1 in 999 downTo 100) {
+        for (num2 in 999 downTo 100) {
             val checker = (num1 * num2).toString()
-            if(checker == checker.reversed()) {
-                println("The largest palindrome made from the product of two 3-digit numbers is: $checker = $num1 x $num2")
-                break@mainLoop
+            if (checker == checker.reversed()) {
+                if (list.isNotEmpty() && checker.toInt() > list[0]) {
+                    list.clear()
+                    list.add(checker.toInt())
+                    list.add(num1)
+                    list.add(num2)
+                }
+                else{
+                    list.add(checker.toInt())
+                    list.add(num1)
+                    list.add(num2)
+                }
             }
         }
     }
+    println("The largest palindrome made from the product of two 3-digit numbers is: ${list[0]} = ${list[1]} x ${list[2]}")
 }
 
 
@@ -32,7 +42,6 @@ fun main(args: Array<String>) {
 //    }
 //    println(sum)
 //
-
 
 
 //    SP 2
