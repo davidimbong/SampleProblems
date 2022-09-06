@@ -1,4 +1,3 @@
-import kotlin.math.sqrt
 import kotlin.system.measureTimeMillis
 
 fun main(args: Array<String>) {
@@ -7,22 +6,25 @@ fun main(args: Array<String>) {
 //    The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
 //    Find the largest palindrome made from the product of two 3-digit numbers.
 
-    var x: Int = 0
-    var y: Int = 0
-    var palindrome: Int = 0
-    mainLoop@ for (num1 in 999 downTo 100) {
-        for (num2 in 999 downTo 100) {
-            val checker = (num1 * num2).toString()
-            if (checker == checker.reversed()) {
-                if (checker.toInt() > palindrome) {
-                    x = num1
-                    y = num2
-                    palindrome = checker.toInt()
+    var x = 0
+    var y = 0
+    var palindrome = 0
+    val elapsed = measureTimeMillis {
+        mainLoop@ for (num1 in 999 downTo 100) {
+            for (num2 in 999 downTo 100) {
+                val checker = (num1 * num2).toString()
+                if (checker == checker.reversed()) {
+                    if (checker.toInt() > palindrome) {
+                        x = num1
+                        y = num2
+                        palindrome = checker.toInt()
+                    }
                 }
             }
         }
     }
     println("The largest palindrome made from the product of two 3-digit numbers is: $palindrome = $x x $y ")
+    println("Runtime: $elapsed milliseconds")
 }
 
 
