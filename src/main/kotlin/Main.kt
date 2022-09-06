@@ -2,31 +2,38 @@ import kotlin.system.measureTimeMillis
 
 fun main(args: Array<String>) {
     val test = measureTimeMillis {
-        val squareOfSum = squareOfSum(100)
-        val sumOfSquare = sumOfSquare(100)
-        println("The difference between the sum of the squares and the square of the sum of the first 100 natural numbers is:\n" +
-                "$squareOfSum - $sumOfSquare = ${squareOfSum - sumOfSquare}")
+//        var count = 0
+//        var finalPrime = 2
+//        while(count<10001){
+//            if(isPrime(finalPrime)){
+//                count+=1
+//            }
+//            finalPrime+=1
+//        }
+        println("The 10001st prime number is: ${getPrimeNumber()}")
     }
-
-    println("Run time: $test milliseconds")
+    println("Runtime: $test milliseconds")
 }
 
-fun sumOfSquare(lastNum: Int): Int{
-    var sum = 0
-    for(i in 1..lastNum){
-        sum+= i*i
+fun getPrimeNumber(): Int {
+    var counter = 0
+    var x = 2
+
+    while(counter<10001){
+        if(isPrime(x))
+            counter+=1
+        x+=1
     }
-    return sum
+    return counter
 }
 
-fun squareOfSum(lastNum: Int): Int{
-    var sum = 0
-    for(i in 1..lastNum){
-        sum+= i
+fun isPrime(x: Int): Boolean {
+    for (i in 2..x/2) {
+        if (x % i == 0)
+            return false
     }
-    return sum*sum
+    return true
 }
-
 //    SP 1
 //If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9.
 // The sum of these multiples is 23.
@@ -151,4 +158,28 @@ fun squareOfSum(lastNum: Int): Int{
 //Hence the difference between the sum of the squares of the first ten natural numbers and the square of the sum is 3025 - 385 = 2640L.
 //
 //Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
+//val test = measureTimeMillis {
+//        val squareOfSum = squareOfSum(100)
+//        val sumOfSquare = sumOfSquare(100)
+//        println("The difference between the sum of the squares and the square of the sum of the first 100 natural numbers is:\n" +
+//                "$squareOfSum - $sumOfSquare = ${squareOfSum - sumOfSquare}")
+//    }
 //
+//    println("Run time: $test milliseconds")
+//}
+//
+//fun sumOfSquare(lastNum: Int): Int{
+//    var sum = 0
+//    for(i in 1..lastNum){
+//        sum+= i*i
+//    }
+//    return sum
+//}
+//
+//fun squareOfSum(lastNum: Int): Int{
+//    var sum = 0
+//    for(i in 1..lastNum){
+//        sum+= i
+//    }
+//    return sum*sum
+//}
