@@ -1,27 +1,30 @@
 import kotlin.system.measureTimeMillis
 
 fun main(args: Array<String>) {
-
-    var smallest: Int = 2520
     val test = measureTimeMillis {
-        while (true) {
-            var x = 0
-            for (check in 11..20) {
-                if (smallest % check == 0) {
-                    x += 1
-                } else {
-                    smallest += 20
-                    break
-                }
-            }
-            if (x == 10) {
-                println("The smallest positive number that is divisible through 1-20 is: $smallest ")
-                break
-            }
-        }
+        val squareOfSum = squareOfSum(100)
+        val sumOfSquare = sumOfSquare(100)
+        println("The difference between the sum of the squares and the square of the sum of the first 100 natural numbers is:\n" +
+                "$squareOfSum - $sumOfSquare = ${squareOfSum - sumOfSquare}")
     }
 
-    println("Runtime: $test milliseconds")
+    println("Run time: $test milliseconds")
+}
+
+fun sumOfSquare(lastNum: Int): Int{
+    var sum = 0
+    for(i in 1..lastNum){
+        sum+= i*i
+    }
+    return sum
+}
+
+fun squareOfSum(lastNum: Int): Int{
+    var sum = 0
+    for(i in 1..lastNum){
+        sum+= i
+    }
+    return sum*sum
 }
 
 //    SP 1
@@ -110,3 +113,42 @@ fun main(args: Array<String>) {
 //    println("Runtime: $elapsed milliseconds")
 //
 //fun Int.isPalindrome(): Boolean = this.toString().reversed() == this.toString()
+
+
+// SP 5
+//2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+//
+//What is the smallest positive number that is evenly divisible by all the numbers from 1 to 20?
+//var smallest = 2520
+//val test = measureTimeMillis {
+//    while (true) {
+//        var x = 0
+//        for (check in 11..20) {
+//            if (smallest % check == 0) {
+//                x += 1
+//            } else {
+//                smallest += 20
+//                break
+//            }
+//        }
+//        if (x == 10) {
+//            println("The smallest positive number that is divisible through 1-20 is: $smallest ")
+//            break
+//        }
+//    }
+//}
+//
+//println("Runtime: $test milliseconds")
+
+
+//SP 6
+//The sum of the squares of the first ten natural numbers is:
+//1^2 + 2^2 + ... + 10^2 = 385
+//
+//The square of the sum of the first ten natural numbers is:
+//(1 + 2 + ... + 10)^2 = 55^2 = 3025
+//
+//Hence the difference between the sum of the squares of the first ten natural numbers and the square of the sum is 3025 - 385 = 2640L.
+//
+//Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
+//
