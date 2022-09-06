@@ -2,63 +2,23 @@ import kotlin.math.sqrt
 import kotlin.system.measureTimeMillis
 
 fun main(args: Array<String>) {
-//SP 3
-//PRINT THE RUN TIME IN SECONDS AT THE END OF THE PROGRAM
-//The prime factors of 13195 are 5, 7, 13 and 29.
-//What is the largest prime factor of the number 600851475143 ?
+//    SP 4
+//    A palindromic number reads the same both ways.
+//    The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
+//
+//    Find the largest palindrome made from the product of two 3-digit numbers.
 
-    val list = mutableListOf<Long>()
-    val zero:Long = 0
-    var number:Long = 600851475143
-    var squareroot:Long = sqrt(number.toDouble()).toLong()
-    
-    val elapsed = measureTimeMillis{
-        for(num in 2..squareroot){
-            while(number % num == zero && number / num > 1){
-                number/=num
+    mainLoop@for (num1 in 999 downTo 100){
+        for (num2 in 999 downTo 100){
+            val checker = (num1 * num2).toString()
+            if(checker == checker.reversed()) {
+                println("The largest palindrome made from the product of two 3-digit numbers is: $checker = $num1 x $num2")
+                break@mainLoop
             }
         }
-
-        println("The biggest prime factor of 600851475143 is: $number")
     }
-    println("Runtime: $elapsed milliseconds")
 }
 
-//for(num in 1..600851475143/2)
-//{
-//    if(600851475143 % num == zero){
-//        list.add(num)
-//        println(num)
-//    }
-//}
-//
-//println("Finished on the first task")
-//
-//list.reversed().forEach{
-//    for(num in 1..it/2){
-//        if(it % num == zero){
-//            continue
-//        }
-//        else{
-//            println("Biggest prime factor of 600851475143 is: $num")
-//            break
-//        }
-//    }
-//}
-
-//firstLoop@ for (n:Long in 600851475143/2 downTo 1){
-//    println(n)
-//    for(primeCheck:Long in 1..n/2)
-//    {
-//        if(n % primeCheck == "0".toLong()){
-//            break
-//        }
-//        else{
-//            println("Biggest Prime number of 600851475143 is: $n")
-//            break@firstLoop
-//        }
-//    }
-//}
 
 //    SP 1
 //If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9.
@@ -101,3 +61,22 @@ fun main(args: Array<String>) {
 //    else
 //        sumOfEvenFibonacci(firstNum, secondNum, sum)
 //}
+
+//SP 3
+//PRINT THE RUN TIME IN SECONDS AT THE END OF THE PROGRAM
+//The prime factors of 13195 are 5, 7, 13 and 29.
+//What is the largest prime factor of the number 600851475143 ?
+//
+//val zero:Long = 0
+//var number:Long = 600851475143
+//val squareRoot:Long = sqrt(number.toDouble()).toLong()
+//
+//val elapsed = measureTimeMillis{
+//    for(num in 2..squareRoot){
+//        while(number % num == zero && number / num > 1){
+//            number/=num
+//        }
+//    }
+//    println("The biggest prime factor of 600851475143 is: $number")
+//}
+//println("Runtime: $elapsed milliseconds")
