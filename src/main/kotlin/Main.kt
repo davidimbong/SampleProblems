@@ -10,7 +10,7 @@ fun main(args: Array<String>) {
                         val a2 = a*a
                         val b2 = b*b
                         val c2 = c*c
-                        println("The pythagorean triplets are: $a $b $c")
+                        println("The pythagorean triplets are:\n$a + $b + $c = 1000")
                         println("$a2 + $b2 = $c2")
                         break@mainloop
                     }
