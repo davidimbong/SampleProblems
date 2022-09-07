@@ -3,8 +3,8 @@ import kotlin.system.measureTimeMillis
 
 fun main(args: Array<String>) {
     val test = measureTimeMillis {
-        mainloop@for(a in 1..800){
-            for(b in 1..800){
+        mainloop@for(a in 1..400){
+            for(b in 1..400){
                 for(c in 1..800){
                     if(is1000PythagoreanTriplet(a,b,c)){
                         println("The pythagorean triplets are: $a $b $c")
@@ -257,3 +257,13 @@ fun is1000PythagoreanTriplet(a: Int, b: Int, c: Int): Boolean{
 //    }
 //    println("Runtime: $test millisecond(s)")
 //}
+
+
+//SP 9
+//A Pythagorean triplet is a set of three natural numbers, a < b < c, for which,
+//a^2 + b^2 = c^2
+//For example, 3^2 + 4^2 = 9 + 16 = 25 = 5^2.
+//There exists exactly one Pythagorean triplet for which a + b + c = 1000.
+//Find the product `abc` and display the Pythagorean triplet
+//
+//
