@@ -1,39 +1,57 @@
+import kotlin.math.sqrt
 import kotlin.system.measureTimeMillis
 
 fun main(args: Array<String>) {
     val test = measureTimeMillis {
-//        var count = 0
-//        var finalPrime = 2
-//        while(count<10001){
-//            if(isPrime(finalPrime)){
-//                count+=1
-//            }
-//            finalPrime+=1
-//        }
         println("The 10001st prime number is: ${getPrimeNumber()}")
     }
     println("Runtime: $test milliseconds")
 }
 
 fun getPrimeNumber(): Int {
-    var counter = 0
-    var x = 2
+    var counter = 1
+    var prime = 0
 
-    while(counter<10001){
-        if(isPrime(x))
-            counter+=1
-        x+=1
+    for( i in 3..Int.MAX_VALUE step 2){
+        if(isPrime(i) ) {
+            counter++
+                if(counter == 10001)
+                {
+                    prime = i
+                    break
+                }
+        }
     }
-    return counter
+
+    return prime
 }
 
 fun isPrime(x: Int): Boolean {
-    for (i in 2..x/2) {
+    for (i in 3..sqrt(x.toDouble()).toInt() step 2) {
         if (x % i == 0)
             return false
     }
     return true
 }
+
+//    var primeNumber = 0
+//    while (true) {
+//        for (i in 1..Int.MAX_VALUE) {
+//            if(isPrime(i)) {
+//                primeNumber = i
+//
+//            }
+//        }
+//    }
+
+//    while(counter<10000){
+//        if(isPrime(x))
+//            counter+=1
+//        x+=2
+//    }
+//
+//    return primeNumber
+
 //    SP 1
 //If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9.
 // The sum of these multiples is 23.
