@@ -7,7 +7,11 @@ fun main(args: Array<String>) {
             for(b in 1..400){
                 for(c in 1..800){
                     if(is1000PythagoreanTriplet(a,b,c)){
+                        val a2 = a*a
+                        val b2 = b*b
+                        val c2 = c*c
                         println("The pythagorean triplets are: $a $b $c")
+                        println("$a2 + $b2 = $c2")
                         break@mainloop
                     }
                 }
