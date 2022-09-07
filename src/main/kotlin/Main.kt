@@ -3,30 +3,30 @@ import kotlin.system.measureTimeMillis
 
 fun main(args: Array<String>) {
     val test = measureTimeMillis {
-        mainloop@for(a in 1..400){
-            for(b in 1..400){
-                for(c in 1..800){
-                    if(is1000PythagoreanTriplet(a,b,c)){
-//                        val a2 = a*a
-//                        val b2 = b*b
-//                        val c2 = c*c
-                        println("The pythagorean triplets are: $a * $b * $c = ${a*b*c}")
-//                        println("$a^2 + $b^2 = $a2 + $b2 = $c2 = $c^2")
-                        break@mainloop
-                    }
-                }
-            }
-        }
+        println("The sum of all the prime numbers below two million is: ${getPrimeSum()}")
     }
     println("Runtime: $test millisecond(s)")
 }
+fun getPrimeSum(): Long {
+    var sum:Long = 2
 
-fun is1000PythagoreanTriplet(a: Int, b: Int, c: Int): Boolean{
-    if(a+b+c == 1000 && (a*a + b*b) == c*c ){
-        return true
+    for( i in 3..2000000 step 2){
+        if(isPrime(i) ) {
+            sum+=i
+        }
     }
-    return false
+
+    return sum
 }
+
+fun isPrime(x: Int): Boolean {
+    for (i in 3..sqrt(x.toDouble()).toInt() step 2) {
+        if (x % i == 0)
+            return false
+    }
+    return true
+}
+
 //    SP 1
 //If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9.
 // The sum of these multiples is 23.
@@ -214,7 +214,6 @@ fun is1000PythagoreanTriplet(a: Int, b: Int, c: Int): Boolean{
 //    return true
 //}
 
-
 //SP 8
 //The four adjacent digits in the 1000-digit number that have the greatest product are 9 × 9 × 8 × 9 = 5832.
 //
@@ -270,4 +269,29 @@ fun is1000PythagoreanTriplet(a: Int, b: Int, c: Int): Boolean{
 //There exists exactly one Pythagorean triplet for which a + b + c = 1000.
 //Find the product `abc` and display the Pythagorean triplet
 //
+//val test = measureTimeMillis {
+//        mainloop@for(a in 1..400){
+//            for(b in 1..400){
+//                for(c in 1..800){
+//                    if(is1000PythagoreanTriplet(a,b,c)){
+//                        println("The pythagorean triplets are: $a * $b * $c = ${a*b*c}")
+//                        break@mainloop
+//                    }
+//                }
+//            }
+//        }
+//    }
+//    println("Runtime: $test millisecond(s)")
+//}
+//fun is1000PythagoreanTriplet(a: Int, b: Int, c: Int): Boolean{
+//    if(a+b+c == 1000 && (a*a + b*b) == c*c ){
+//        return true
+//    }
+//    return false
+//}
+
+
+//SP 10
+//The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
 //
+//Find the sum of all the primes below two million.
