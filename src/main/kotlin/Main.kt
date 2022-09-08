@@ -2,7 +2,7 @@ import kotlin.system.measureTimeMillis
 
 fun main(args: Array<String>) {
     val test = measureTimeMillis {
-        var list = Array(20) { IntArray(20) }
+        val list = Array(20) { IntArray(20) }
         list[0] = intArrayOf(8, 2, 22, 97, 38, 15, 0, 40, 0, 75, 4, 5, 7, 78, 52, 12, 50, 77, 91, 8)
         list[1] = intArrayOf(49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48, 4, 56, 62, 0)
         list[2] = intArrayOf(81, 49, 31, 73, 55, 79, 14, 29, 93, 71, 40, 67, 53, 88, 30, 3, 49, 13, 36, 65)
@@ -24,10 +24,10 @@ fun main(args: Array<String>) {
         list[18] = intArrayOf(20, 73, 35, 29, 78, 31, 90, 1, 74, 31, 49, 71, 48, 86, 81, 16, 23, 57, 5, 54)
         list[19] = intArrayOf(1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48)
         var highestProduct: Long = 0
-        
+
         for (i in list.indices) {
             for (x in list[i].indices) {
-                var tempNumber: Long = maxOf(
+                val tempNumber: Long = maxOf(
                     listIteratorHorizontal(list, i, x),
                     listIteratorVertical(list, i, x),
                     listIteratorDiagonalLeft(list, i, x),
@@ -38,7 +38,6 @@ fun main(args: Array<String>) {
                     highestProduct = tempNumber
             }
         }
-
 
         println("The highest product from 4 adjacent numbers in the list of numbers is: $highestProduct")
 
