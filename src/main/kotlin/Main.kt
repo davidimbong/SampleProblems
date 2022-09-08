@@ -1,100 +1,33 @@
+import kotlin.math.sqrt
 import kotlin.system.measureTimeMillis
 
 fun main(args: Array<String>) {
     val test = measureTimeMillis {
-        val list = Array(20) { IntArray(20) }
-        list[0] = intArrayOf(8, 2, 22, 97, 38, 15, 0, 40, 0, 75, 4, 5, 7, 78, 52, 12, 50, 77, 91, 8)
-        list[1] = intArrayOf(49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48, 4, 56, 62, 0)
-        list[2] = intArrayOf(81, 49, 31, 73, 55, 79, 14, 29, 93, 71, 40, 67, 53, 88, 30, 3, 49, 13, 36, 65)
-        list[3] = intArrayOf(52, 70, 95, 23, 4, 60, 11, 42, 69, 24, 68, 56, 1, 32, 56, 71, 37, 2, 36, 91)
-        list[4] = intArrayOf(22, 31, 16, 71, 51, 67, 63, 89, 41, 92, 36, 54, 22, 40, 40, 28, 66, 33, 13, 80)
-        list[5] = intArrayOf(24, 47, 32, 60, 99, 3, 45, 2, 44, 75, 33, 53, 78, 36, 84, 20, 35, 17, 12, 50)
-        list[6] = intArrayOf(32, 98, 81, 28, 64, 23, 67, 10, 26, 38, 40, 67, 59, 54, 70, 66, 18, 38, 64, 70)
-        list[7] = intArrayOf(67, 26, 20, 68, 2, 62, 12, 20, 95, 63, 94, 39, 63, 8, 40, 91, 66, 49, 94, 21)
-        list[8] = intArrayOf(24, 55, 58, 5, 66, 73, 99, 26, 97, 17, 78, 78, 96, 83, 14, 88, 34, 89, 63, 72)
-        list[9] = intArrayOf(21, 36, 23, 9, 75, 0, 76, 44, 20, 45, 35, 14, 0, 61, 33, 97, 34, 31, 33, 95)
-        list[10] = intArrayOf(78, 17, 53, 28, 22, 75, 31, 67, 15, 94, 3, 80, 4, 62, 16, 14, 9, 53, 56, 92)
-        list[11] = intArrayOf(16, 39, 5, 42, 96, 35, 31, 47, 55, 58, 88, 24, 0, 17, 54, 24, 36, 29, 85, 57)
-        list[12] = intArrayOf(86, 56, 0, 48, 35, 71, 89, 7, 5, 44, 44, 37, 44, 60, 21, 58, 51, 54, 17, 58)
-        list[13] = intArrayOf(19, 80, 81, 68, 5, 94, 47, 69, 28, 73, 92, 13, 86, 52, 17, 77, 4, 89, 55, 40)
-        list[14] = intArrayOf(4, 52, 8, 83, 97, 35, 99, 16, 7, 97, 57, 32, 16, 26, 26, 79, 33, 27, 98, 66)
-        list[15] = intArrayOf(88, 36, 68, 87, 57, 62, 20, 72, 3, 46, 33, 67, 46, 55, 12, 32, 63, 93, 53, 69)
-        list[16] = intArrayOf(4, 42, 16, 73, 38, 25, 39, 11, 24, 94, 72, 18, 8, 46, 29, 32, 40, 62, 76, 36)
-        list[17] = intArrayOf(20, 69, 36, 41, 72, 30, 23, 88, 34, 62, 99, 69, 82, 67, 59, 85, 74, 4, 36, 16)
-        list[18] = intArrayOf(20, 73, 35, 29, 78, 31, 90, 1, 74, 31, 49, 71, 48, 86, 81, 16, 23, 57, 5, 54)
-        list[19] = intArrayOf(1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48)
-        var highestProduct: Long = 0
-
-        for (i in list.indices) {
-            for (x in list[i].indices) {
-                val tempNumber: Long = maxOf(
-                    listIteratorHorizontal(list, i, x),
-                    listIteratorVertical(list, i, x),
-                    listIteratorDiagonalLeft(list, i, x),
-                    listIteratorDiagonalRight(list, i, x)
-                )
-
-                if (tempNumber > highestProduct)
-                    highestProduct = tempNumber
+        var num:Long = 0
+        whileLoop@while(true){
+            for (i in 1..Long.MAX_VALUE){
+                num += i
+                println(num)
+                if(factorCounter(num)) {
+                    println("The value of the first triangle number to have over five hundred divisors is: $num ")
+                    break@whileLoop
+                }
             }
         }
-
-        println("The highest product from 4 adjacent numbers in the list of numbers is: $highestProduct")
-
     }
     println("Runtime: $test millisecond(s)")
 }
-
-fun listIteratorHorizontal(list: Array<IntArray>, row: Int, startColumn: Int): Long {
-    var product: Long = 1
-    try {
-        for (i in startColumn..(startColumn + 3))
-            product *= list[row][i]
-
-    } catch (e: IndexOutOfBoundsException) {
-        return 0
+fun factorCounter(num:Long): Boolean{
+    var counter: Int = 1
+    for(i in 2..sqrt(num.toDouble()).toLong()){
+        if(num % i == "0".toLong())
+            counter+=2
     }
-    return product
+    if(counter > 500)
+        return true
+    return false
 }
 
-fun listIteratorVertical(list: Array<IntArray>, startRow: Int, Column: Int): Long {
-    var product: Long = 1
-    try {
-        for (i in startRow..(startRow + 3))
-            product *= list[i][Column]
-    } catch (e: IndexOutOfBoundsException) {
-        return 0
-    }
-    return product
-}
-
-fun listIteratorDiagonalLeft(list: Array<IntArray>, startRow: Int, startColumn: Int): Long {
-    var product: Long = 1
-    try {
-
-        product *= list[startRow][startColumn]
-        product *= list[startRow + 1][startColumn + 1]
-        product *= list[startRow + 2][startColumn + 2]
-        product *= list[startRow + 3][startColumn + 3]
-
-    } catch (e: IndexOutOfBoundsException) {
-        return 0
-    }
-    return product
-}
-
-fun listIteratorDiagonalRight(list: Array<IntArray>, startRow: Int, startColumn: Int): Long {
-    var product: Long = 1
-    try {
-        product *= list[startRow][startColumn]
-        product *= list[startRow + 1][startColumn - 1]
-        product *= list[startRow + 2][startColumn - 2]
-        product *= list[startRow + 3][startColumn - 3]
-    } catch (e: IndexOutOfBoundsException) {
-        return 0
-    }
-    return product
-}
 
 
 //    SP 1
@@ -396,118 +329,112 @@ fun listIteratorDiagonalRight(list: Array<IntArray>, startRow: Int, startColumn:
 //What is the greatest product of four adjacent numbers in the same direction in the 20x20 grid?
 //
 //val test = measureTimeMillis {
-//        var list = Array(20){ IntArray(20) }
-//        list[0] = intArrayOf(8, 2, 22, 97, 38, 15, 0, 40, 0, 75, 4, 5, 7, 78, 52, 12, 50, 77, 91, 8)
-//        list[1] = intArrayOf(49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48, 4, 56, 62, 0)
-//        list[2] = intArrayOf(81, 49, 31, 73, 55, 79, 14, 29, 93, 71, 40, 67, 53, 88, 30, 3, 49, 13, 36, 65)
-//        list[3] = intArrayOf(52, 70, 95, 23, 4, 60, 11, 42, 69, 24, 68, 56, 1, 32, 56, 71, 37, 2, 36, 91)
-//        list[4] = intArrayOf(22, 31, 16, 71, 51, 67, 63, 89, 41, 92, 36, 54, 22, 40, 40, 28, 66, 33, 13, 80)
-//        list[5] = intArrayOf(24, 47, 32, 60, 99, 3, 45, 2, 44, 75, 33, 53, 78, 36, 84, 20, 35, 17, 12, 50)
-//        list[6] = intArrayOf(32, 98, 81, 28, 64, 23, 67, 10, 26, 38, 40, 67, 59, 54, 70, 66, 18, 38, 64, 70)
-//        list[7] = intArrayOf(67, 26, 20, 68, 2, 62, 12, 20, 95, 63, 94, 39, 63, 8, 40, 91, 66, 49, 94, 21)
-//        list[8] = intArrayOf(24, 55, 58, 5, 66, 73, 99, 26, 97, 17, 78, 78, 96, 83, 14, 88, 34, 89, 63, 72)
-//        list[9] = intArrayOf(21, 36, 23, 9, 75, 0, 76, 44, 20, 45, 35, 14, 0, 61, 33, 97, 34, 31, 33, 95)
-//        list[10] = intArrayOf(78, 17, 53, 28, 22, 75, 31, 67, 15, 94, 3, 80, 4, 62, 16, 14, 9, 53, 56, 92)
-//        list[11] = intArrayOf(16, 39, 5, 42, 96, 35, 31, 47, 55, 58, 88, 24, 0, 17, 54, 24, 36, 29, 85, 57)
-//        list[12] = intArrayOf(86, 56, 0, 48, 35, 71, 89, 7, 5, 44, 44, 37, 44, 60, 21, 58, 51, 54, 17, 58)
-//        list[13] = intArrayOf(19, 80, 81, 68, 5, 94, 47, 69, 28, 73, 92, 13, 86, 52, 17, 77, 4, 89, 55, 40)
-//        list[14] = intArrayOf(4, 52, 8, 83, 97, 35, 99, 16, 7, 97, 57, 32, 16, 26, 26, 79, 33, 27, 98, 66)
-//        list[15] = intArrayOf(88, 36, 68, 87, 57, 62, 20, 72, 3, 46, 33, 67, 46, 55, 12, 32, 63, 93, 53, 69)
-//        list[16] = intArrayOf(4, 42, 16, 73, 38, 25, 39, 11, 24, 94, 72, 18, 8, 46, 29, 32, 40, 62, 76, 36)
-//        list[17] = intArrayOf(20, 69, 36, 41, 72, 30, 23, 88, 34, 62, 99, 69, 82, 67, 59, 85, 74, 4, 36, 16)
-//        list[18] = intArrayOf(20, 73, 35, 29, 78, 31, 90, 1, 74, 31, 49, 71, 48, 86, 81, 16, 23, 57, 5, 54)
-//        list[19] = intArrayOf(1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48)
-//        var highestProduct:Long = 0
-//
-//        println(listIteratorVertical(list))
-//        println(listIteratorDiagonalLeft(list))
-//        println(listIteratorHorizontal(list))
-//        println(listIteratorDiagonalRight(list))
-//        highestProduct = maxOf(listIteratorHorizontal(list),
-//            listIteratorVertical(list),
-//            listIteratorDiagonalLeft(list),
-//            listIteratorDiagonalRight(list)
-//        )
-//
-//        println("The highest product from 4 adjacent numbers in the list of numbers is: $highestProduct")
-//
-//    }
-//    println("Runtime: $test millisecond(s)")
-//}
-//
-//fun listIteratorHorizontal(list: Array<IntArray>):Long{
-//    var highestProduct:Long = 0
-//    for(i in list.indices){
-//        for(x in 0..16){
-//            val tempArray = list[i].copyOfRange(x,x+4)
-//            var tempProduct:Long = 1
-//            tempArray.forEach { tempProduct *= it }
-//
-//            if(tempProduct > highestProduct) {
-//                highestProduct = tempProduct
-//            }
-//        }
-//    }
-//    return highestProduct
-//}
-//
-//fun listIteratorVertical(list: Array<IntArray>):Long{
-//    var highestProduct:Long = 0
-//    for(column in list.indices){
-//        for(row in 0..16){
-//
-//            var tempArray = IntArray(4)
-//            tempArray[0] = list[row][column]
-//            tempArray[1] = list[row + 1][column]
-//            tempArray[2] = list[row + 2][column]
-//            tempArray[3] = list[row + 3][column]
-//            var tempProduct:Long = 1
-//
-//            tempArray.forEach { tempProduct *= it }
-//            if(tempProduct > highestProduct)
-//                highestProduct = tempProduct
-//        }
-//    }
-//    return highestProduct
-//}
-//
-//fun listIteratorDiagonalLeft(list: Array<IntArray>):Long{
+//    val list = Array(20) { IntArray(20) }
+//    list[0] = intArrayOf(8, 2, 22, 97, 38, 15, 0, 40, 0, 75, 4, 5, 7, 78, 52, 12, 50, 77, 91, 8)
+//    list[1] = intArrayOf(49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48, 4, 56, 62, 0)
+//    list[2] = intArrayOf(81, 49, 31, 73, 55, 79, 14, 29, 93, 71, 40, 67, 53, 88, 30, 3, 49, 13, 36, 65)
+//    list[3] = intArrayOf(52, 70, 95, 23, 4, 60, 11, 42, 69, 24, 68, 56, 1, 32, 56, 71, 37, 2, 36, 91)
+//    list[4] = intArrayOf(22, 31, 16, 71, 51, 67, 63, 89, 41, 92, 36, 54, 22, 40, 40, 28, 66, 33, 13, 80)
+//    list[5] = intArrayOf(24, 47, 32, 60, 99, 3, 45, 2, 44, 75, 33, 53, 78, 36, 84, 20, 35, 17, 12, 50)
+//    list[6] = intArrayOf(32, 98, 81, 28, 64, 23, 67, 10, 26, 38, 40, 67, 59, 54, 70, 66, 18, 38, 64, 70)
+//    list[7] = intArrayOf(67, 26, 20, 68, 2, 62, 12, 20, 95, 63, 94, 39, 63, 8, 40, 91, 66, 49, 94, 21)
+//    list[8] = intArrayOf(24, 55, 58, 5, 66, 73, 99, 26, 97, 17, 78, 78, 96, 83, 14, 88, 34, 89, 63, 72)
+//    list[9] = intArrayOf(21, 36, 23, 9, 75, 0, 76, 44, 20, 45, 35, 14, 0, 61, 33, 97, 34, 31, 33, 95)
+//    list[10] = intArrayOf(78, 17, 53, 28, 22, 75, 31, 67, 15, 94, 3, 80, 4, 62, 16, 14, 9, 53, 56, 92)
+//    list[11] = intArrayOf(16, 39, 5, 42, 96, 35, 31, 47, 55, 58, 88, 24, 0, 17, 54, 24, 36, 29, 85, 57)
+//    list[12] = intArrayOf(86, 56, 0, 48, 35, 71, 89, 7, 5, 44, 44, 37, 44, 60, 21, 58, 51, 54, 17, 58)
+//    list[13] = intArrayOf(19, 80, 81, 68, 5, 94, 47, 69, 28, 73, 92, 13, 86, 52, 17, 77, 4, 89, 55, 40)
+//    list[14] = intArrayOf(4, 52, 8, 83, 97, 35, 99, 16, 7, 97, 57, 32, 16, 26, 26, 79, 33, 27, 98, 66)
+//    list[15] = intArrayOf(88, 36, 68, 87, 57, 62, 20, 72, 3, 46, 33, 67, 46, 55, 12, 32, 63, 93, 53, 69)
+//    list[16] = intArrayOf(4, 42, 16, 73, 38, 25, 39, 11, 24, 94, 72, 18, 8, 46, 29, 32, 40, 62, 76, 36)
+//    list[17] = intArrayOf(20, 69, 36, 41, 72, 30, 23, 88, 34, 62, 99, 69, 82, 67, 59, 85, 74, 4, 36, 16)
+//    list[18] = intArrayOf(20, 73, 35, 29, 78, 31, 90, 1, 74, 31, 49, 71, 48, 86, 81, 16, 23, 57, 5, 54)
+//    list[19] = intArrayOf(1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48)
 //    var highestProduct: Long = 0
-//    for(column in 0..16){
-//        for(row in 0..16){
-//            var tempArray = IntArray(4)
-//            tempArray[0] = list[row][column]
-//            tempArray[1] = list[row + 1][column + 1]
-//            tempArray[2] = list[row + 2][column + 2]
-//            tempArray[3] = list[row + 3][column + 3]
-//            var tempProduct:Long = 1
 //
-//            tempArray.forEach { tempProduct *= it }
-//            if(tempProduct > highestProduct)
-//                highestProduct = tempProduct
+//    for (i in list.indices) {
+//        for (x in list[i].indices) {
+//            val tempNumber: Long = maxOf(
+//                listIteratorHorizontal(list, i, x),
+//                listIteratorVertical(list, i, x),
+//                listIteratorDiagonalLeft(list, i, x),
+//                listIteratorDiagonalRight(list, i, x)
+//            )
+//
+//            if (tempNumber > highestProduct)
+//                highestProduct = tempNumber
 //        }
 //    }
-//    return highestProduct
+//
+//    println("The highest product from 4 adjacent numbers in the list of numbers is: $highestProduct")
+//
+//}
+//println("Runtime: $test millisecond(s)")
 //}
 //
-//fun listIteratorDiagonalRight(list: Array<IntArray>):Long{
-//    var highestProduct: Long = 0
-//    for(column in 3..19){
-//        for(row in 0..16){
-//            var tempArray = IntArray(4)
-//            tempArray[0] = list[row][column]
-//            tempArray[1] = list[row + 1][column - 1]
-//            tempArray[2] = list[row + 2][column - 2]
-//            tempArray[3] = list[row + 3][column - 3]
-//            var tempProduct:Long = 1
+//fun listIteratorHorizontal(list: Array<IntArray>, row: Int, startColumn: Int): Long {
+//    var product: Long = 1
+//    try {
+//        for (i in startColumn..(startColumn + 3))
+//            product *= list[row][i]
 //
-//            tempArray.forEach { tempProduct *= it }
-//            if(tempProduct > highestProduct)
-//                highestProduct = tempProduct
-//        }
+//    } catch (e: IndexOutOfBoundsException) {
+//        return 0
 //    }
-//    return highestProduct
+//    return product
 //}
-
+//
+//fun listIteratorVertical(list: Array<IntArray>, startRow: Int, Column: Int): Long {
+//    var product: Long = 1
+//    try {
+//        for (i in startRow..(startRow + 3))
+//            product *= list[i][Column]
+//    } catch (e: IndexOutOfBoundsException) {
+//        return 0
+//    }
+//    return product
+//}
+//
+//fun listIteratorDiagonalLeft(list: Array<IntArray>, startRow: Int, startColumn: Int): Long {
+//    var product: Long = 1
+//    try {
+//
+//        product *= list[startRow][startColumn]
+//        product *= list[startRow + 1][startColumn + 1]
+//        product *= list[startRow + 2][startColumn + 2]
+//        product *= list[startRow + 3][startColumn + 3]
+//
+//    } catch (e: IndexOutOfBoundsException) {
+//        return 0
+//    }
+//    return product
+//}
+//
+//fun listIteratorDiagonalRight(list: Array<IntArray>, startRow: Int, startColumn: Int): Long {
+//    var product: Long = 1
+//    try {
+//        product *= list[startRow][startColumn]
+//        product *= list[startRow + 1][startColumn - 1]
+//        product *= list[startRow + 2][startColumn - 2]
+//        product *= list[startRow + 3][startColumn - 3]
+//    } catch (e: IndexOutOfBoundsException) {
+//        return 0
+//    }
+//    return product
+//}
 
 //SP 12
+//The sequence of triangle numbers is generated by adding the natural numbers. So the 7th triangle number would be 1 + 2 + 3 +
+//4 + 5 + 6 + 7 = 28. The first ten terms would be:
+//      1, 3, 6, 10, 15, 21, 28, 36, 45, 55, ...
+//Let us list the factors of the first seven triangle numbers:
+// 1: 1
+// 3: 1,3
+// 6: 1,2,3,6
+//10: 1,2,5,10
+//15: 1,3,5,15
+//21: 1,3,7,21
+//28: 1,2,4,7,14,28
+//We can see that 28 is the first triangle number to have over five divisors.
+//What is the value of the first triangle number to have over five hundred divisors?
+//
