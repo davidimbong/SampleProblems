@@ -1,34 +1,10 @@
+import java.math.BigInteger
 import kotlin.system.measureTimeMillis
 
 fun main(args: Array<String>) {
-    val test = measureTimeMillis {
-        var highestCount: Long = 0
-        var startNum = 0
-        for (i in 1 until 1000000) {
-            if (chainCounter(i) > highestCount) {
-                highestCount = chainCounter(i)
-                startNum = i
-            }
-        }
-        println("The starting number, under one million, that produces the longest chain is: $startNum")
-    }
-    println("Runtime: $test millisecond(s)")
+
 }
 
-fun chainCounter(num: Int): Long {
-    var tempNum = num.toLong()
-    var counter: Long = 1
-    while (tempNum != "1".toLong()) {
-        if (tempNum % 2 == "0".toLong())
-            tempNum /= 2
-        else {
-            tempNum *= 3
-            tempNum++
-        }
-        counter++
-    }
-    return counter
-}
 
 //    SP 1
 //If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9.
@@ -474,4 +450,56 @@ fun chainCounter(num: Int): Long {
 //Which starting number, under one million, produces the longest chain?
 //NOTE: Once the chain starts the terms are allowed to go above one million.
 //
+//val test = measureTimeMillis {
+//        var highestCount: Long = 0
+//        var startNum = 0
+//        for (i in 1 until 1000000) {
+//            if (chainCounter(i) > highestCount) {
+//                highestCount = chainCounter(i)
+//                startNum = i
+//            }
+//        }
+//        println("The starting number, under one million, that produces the longest chain is: $startNum")
+//    }
+//    println("Runtime: $test millisecond(s)")
+//}
+//
+//fun chainCounter(num: Int): Long {
+//    var tempNum = num.toLong()
+//    var counter: Long = 1
+//    while (tempNum != "1".toLong()) {
+//        if (tempNum % 2 == "0".toLong())
+//            tempNum /= 2
+//        else {
+//            tempNum *= 3
+//            tempNum++
+//        }
+//        counter++
+//    }
+//    return counter
+//}
+
+
+//SP 14
+//Starting in the top left corner of a 2x2 grid, and only being able to move to the right and down, there are exactly 6 routes to the
+//bottom right corner.
+//How many such routes are there through a 20× 20 grid?
+//
+//val test = measureTimeMillis {
+//        val possibilities = factorial(40) / (factorial(20) * factorial(20))
+//        println("The number of possibilities are: $possibilities")
+//
+//    }
+//    println("Runtime: $test millisecond(s)")
+//}
+//fun factorial(x: Int): BigInteger{
+//    var num = "1".toBigInteger()
+//    for(i in 1..x){
+//        num*=i.toBigInteger()
+//    }
+//    return num
+//}
+
+
+//SP 15
 //
