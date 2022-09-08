@@ -1,34 +1,34 @@
-import kotlin.math.sqrt
 import kotlin.system.measureTimeMillis
 
 fun main(args: Array<String>) {
     val test = measureTimeMillis {
-        var num:Long = 0
-        whileLoop@while(true){
-            for (i in 1..Long.MAX_VALUE){
-                num += i
-                println(num)
-                if(factorCounter(num)) {
-                    println("The value of the first triangle number to have over five hundred divisors is: $num ")
-                    break@whileLoop
-                }
+        var highestCount: Long = 0
+        var startNum = 0
+        for (i in 1 until 1000000) {
+            if (chainCounter(i) > highestCount) {
+                highestCount = chainCounter(i)
+                startNum = i
             }
         }
+        println("The starting number, under one million, that produces the longest chain is: $startNum")
     }
     println("Runtime: $test millisecond(s)")
 }
-fun factorCounter(num:Long): Boolean{
-    var counter: Int = 1
-    for(i in 2..sqrt(num.toDouble()).toLong()){
-        if(num % i == "0".toLong())
-            counter+=2
+
+fun chainCounter(num: Int): Long {
+    var tempNum = num.toLong()
+    var counter: Long = 1
+    while (tempNum != "1".toLong()) {
+        if (tempNum % 2 == "0".toLong())
+            tempNum /= 2
+        else {
+            tempNum *= 3
+            tempNum++
+        }
+        counter++
     }
-    if(counter > 500)
-        return true
-    return false
+    return counter
 }
-
-
 
 //    SP 1
 //If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9.
@@ -437,4 +437,41 @@ fun factorCounter(num:Long): Boolean{
 //28: 1,2,4,7,14,28
 //We can see that 28 is the first triangle number to have over five divisors.
 //What is the value of the first triangle number to have over five hundred divisors?
+//
+//val test = measureTimeMillis {
+//        var num:Long = 0
+//        whileLoop@while(true){
+//            for (i in 1..Long.MAX_VALUE){
+//                num += i
+//                if(factorCounter(num)) {
+//                    println("The value of the first triangle number to have over five hundred divisors is: $num ")
+//                    break@whileLoop
+//                }
+//            }
+//        }
+//    }
+//    println("Runtime: $test millisecond(s)")
+//}
+//fun factorCounter(num:Long): Boolean{
+//    var counter: Int = 1
+//    for(i in 2..sqrt(num.toDouble()).toLong()){
+//        if(num % i == "0".toLong())
+//            counter+=2
+//    }
+//    if(counter > 500)
+//        return true
+//    return false
+//}
+
+//SP 13
+//The following iterative sequence is defined for the set of positive integers
+//n - n/2 (n is even)
+//n - 3n + 1 (n is odd)
+//Using the rule above and starting with 13, we generate the following sequence:
+//13 - 40 - 20 - 10 - 5 - 16 - 8 - 4 - 2 - 1
+//It can be seen that this sequence (starting at 13 and finishing at 1) contains 10 terms. Although it has not been proved yet (Collatz
+//Problem), it is thought that all starting numbers finish at 1.
+//Which starting number, under one million, produces the longest chain?
+//NOTE: Once the chain starts the terms are allowed to go above one million.
+//
 //
