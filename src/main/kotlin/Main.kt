@@ -3,7 +3,7 @@ import kotlin.system.measureTimeMillis
 fun main(args: Array<String>) {
     val test = measureTimeMillis {
         val list = mutableListOf<MutableList<Int>>()
-        list.add(mutableListOf(3))
+        list.add(mutableListOf(75))
         list.add(mutableListOf(95, 64))
         list.add(mutableListOf(17, 47, 82))
         list.add(mutableListOf(18, 35, 87, 10))
